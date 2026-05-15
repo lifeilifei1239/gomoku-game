@@ -1,11 +1,10 @@
 {
   "github": {
-    "type": "http",
-    "url": "https://api.githubcopilot.com/mcp/",
-    "headers": {
-      "Authorization": "Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}"
-    },
+    "type": "stdio",
+    "command": "npx",
+    "args": ["-y", "@anthropic-ai/mcp-github-server"],
     "env": {
+      "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}",
       "HTTP_PROXY": "http://127.0.0.1:7890",
       "HTTPS_PROXY": "http://127.0.0.1:7890"
     }
