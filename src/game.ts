@@ -88,6 +88,12 @@ export class GomokuGame {
    * @returns 是否落子成功
    */
   placePiece(row: number, col: number): boolean {
+    // 检查输入是否为整数
+    if (!Number.isInteger(row) || !Number.isInteger(col)) {
+      console.warn('坐标必须是整数');
+      return false;
+    }
+
     // 检查游戏是否进行中
     if (this.state.status !== GameStatus.PLAYING) {
       console.warn('游戏已结束，无法落子');

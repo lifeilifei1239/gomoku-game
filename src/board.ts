@@ -28,6 +28,8 @@ export class BoardRenderer {
   private lastMove: Position | null = null;
   /** 获胜标记动画计数器 */
   private winAnimationFrame: number = 0;
+  /** 动画帧ID（用于取消动画） */
+  private animationId: number | null = null;
 
   /**
    * 构造函数
@@ -362,14 +364,32 @@ export class BoardRenderer {
    * 开始获胜动画
    */
   private startWinAnimation(): void {
+    // 先停止之前的动画（如果有）
+    this.stopWinAnimation();
+
     const animate = () => {
-      if (!this.game.isGameOver()) return;
+      if (!this.game.isGameOver()) {
+        this.animationId = null;
+        return;
+      }
 
       this.winAnimationFrame++;
       this.render();
-      requestAnimationFrame(animate);
+      this.animationId = requestAnimationFrame(animate);
     };
-    animate();
+    this.animationId = requestAnimationFrame(animate);
+  }
+
+  /**
+   * 停止获胜动画
+   */
+  private stopWinAnimation(): void {
+    if (this.animationId !== null) {
+      cancelAnimationFrame(this.animationId);
+      this.animationId = null;
+    }
+    // 重置动画帧计数器
+    this.winAnimationFrame = 0;
   }
 
   /**
@@ -378,5 +398,17 @@ export class BoardRenderer {
    */
   getCanvas(): HTMLCanvasElement {
     return this.canvas;
+  }
+
+  /**
+   * 重置棋盘渲染（用于悔棋或重新开始）
+   */
+  reset(): void {
+    // 停止获胜动画
+    this.stopWinAnimation();
+    // 清除最后落子标记
+    this.lastMove = null;
+    // 重新渲染
+    this.render();
   }
 }

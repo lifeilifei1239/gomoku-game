@@ -66,7 +66,7 @@ class GameUI {
     // 悔棋按钮
     this.undoButton.addEventListener('click', () => {
       if (this.game.undo()) {
-        this.renderer.render();
+        this.renderer.reset();
         this.updateUI();
       }
     });
@@ -74,7 +74,7 @@ class GameUI {
     // 重新开始按钮
     this.restartButton.addEventListener('click', () => {
       this.game.restart();
-      this.renderer.render();
+      this.renderer.reset();
       this.updateUI();
     });
   }
