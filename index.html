@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>五子棋游戏</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .game-container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .game-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .info-item {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    #gameCanvas {
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      display: block;
+      margin: 0 auto 20px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 12px 30px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    #undoBtn {
+      background: #6c757d;
+      color: white;
+    }
+
+    #undoBtn:hover:not(:disabled) {
+      background: #5a6268;
+      transform: translateY(-2px);
+    }
+
+    #undoBtn:disabled {
+      background: #adb5bd;
+      cursor: not-allowed;
+    }
+
+    #restartBtn {
+      background: #28a745;
+      color: white;
+    }
+
+    #restartBtn:hover {
+      background: #218838;
+      transform: translateY(-2px);
+    }
+
+    .rules {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      text-align: left;
+      max-width: 600px;
+    }
+
+    .rules h3 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .rules ul {
+      color: #666;
+      padding-left: 20px;
+    }
+
+    .rules li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>🎮 五子棋</h1>
+
+    <div class="game-info">
+      <div class="info-item" id="currentPlayer">当前玩家：黑棋</div>
+      <div class="info-item" id="status">游戏进行中</div>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <div class="button-group">
+      <button id="undoBtn">悔棋</button>
+      <button id="restartBtn">重新开始</button>
+    </div>
+
+    <div class="rules">
+      <h3>游戏规则</h3>
+      <ul>
+        <li>黑棋先行，双方轮流落子</li>
+        <li>点击棋盘交叉点放置棋子</li>
+        <li>五子连珠（横、竖、斜）即为获胜</li>
+        <li>悔棋功能可撤销上一步</li>
+      </ul>
+    </div>
+  </div>
+
+  <script type="module" src="./dist/index.js"></script>
+</body>
+</html>

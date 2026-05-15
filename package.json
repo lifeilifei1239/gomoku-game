@@ -1,0 +1,15 @@
+{
+  "name": "gomoku-game",
+  "version": "1.0.0",
+  "description": "五子棋小游戏",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsc --watch",
+    "serve": "npx serve ."
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
